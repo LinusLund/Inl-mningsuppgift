@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleAddressbok.Models
 {
-    internal class Person : IPerson, IAddress
+    internal class Person : IPerson 
     {
 
         public Guid Id { get; set; }

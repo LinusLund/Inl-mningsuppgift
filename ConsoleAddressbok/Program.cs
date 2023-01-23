@@ -5,14 +5,27 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ConsoleAddressbok.Services;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 
 var PersonService = new PersonService();
 
 
+PersonService.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
+
+//PersonService.FillList();
+
 bool isRunning = true;
+
+Console.WriteLine("Välkommen till din Adressbok, tryck en knapp för att komma till menyn.");
+Console.ReadKey();
+
+
+
 while (isRunning)
 {
+   
     Console.Clear();
     Console.WriteLine("[1] Lägg till Kontakt");
     Console.WriteLine("[2] Visa Kontaktlista");
@@ -51,7 +64,8 @@ while (isRunning)
             Console.Clear();
             Console.WriteLine($"{newPerson.DisplayName}" +" har lagts till");
             Console.ReadKey();
-            
+
+
             break;
 
         case 2:
@@ -70,15 +84,14 @@ while (isRunning)
 
         case 4:
             Console.Clear();
-            Console.WriteLine("Vänligen Skriv in för och efternamn på den du vill ta bort");
-            PersonService.GetPersonFromList(null!);
-            Console.WriteLine("Är du säker på att du vill ta bort ");
+            PersonService.RemovePersonFromList(null!);
             Console.ReadLine();
             break;
 
         case 5:
             Console.Clear();
             Console.WriteLine("Programmet avslutas,tryck vilken knapp som helst");
+            Console.ReadKey();
             isRunning = false;
             break;
 
@@ -90,6 +103,3 @@ while (isRunning)
     }
 
 }
-
-Console.Clear();
-Console.ReadLine();
