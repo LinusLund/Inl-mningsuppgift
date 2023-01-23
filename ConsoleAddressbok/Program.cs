@@ -14,7 +14,7 @@ var PersonService = new PersonService();
 
 PersonService.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
 
-//PersonService.FillList();
+PersonService.FillList();
 
 bool isRunning = true;
 

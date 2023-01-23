@@ -26,19 +26,19 @@ namespace ConsoleAddressbok.Services
       
 
        
-        //Får inte den här att fungera
-        public void FillList(List<Person> people )
+        
+        internal void FillList()
         {
             try
             {
                 var items = JsonConvert.DeserializeObject<List<Person>>(listFile.Read(FilePath));
                 if (items != null)
-                    people = items;
+                    contactList = items;
 
                 
             }
             catch { }
-            contactList = people;
+            
             
         }
 
@@ -47,7 +47,7 @@ namespace ConsoleAddressbok.Services
         {
                 contactList.Add((Person)person);
 
-            file.Save(FilePath, JsonConvert.SerializeObject(new { person }));
+            file.Save(FilePath, JsonConvert.SerializeObject(contactList));
         }
 
         public void RemovePersonFromList(IPerson person)
@@ -74,7 +74,8 @@ namespace ConsoleAddressbok.Services
                         Console.Clear();
                         Console.WriteLine($"{contactList[i].DisplayName}" + " Har tagits bort!");
                         contactList.Remove(contactList[i]);
-                       
+                        file.Save(FilePath, JsonConvert.SerializeObject(contactList));
+
                     }
                     else if (UserInput == "n")
                     {
@@ -123,7 +124,7 @@ namespace ConsoleAddressbok.Services
             return contactList;
         }
 
-        
+     
     }
 };
 
