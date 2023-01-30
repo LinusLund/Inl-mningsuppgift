@@ -31,12 +31,12 @@ namespace WPFAdressBpk
         public MainWindow()
         {
             InitializeComponent();
-            file.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
+            file.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\WPFList.json";
 
             PopulatePersonList();
         }
 
-        private void PopulatePersonList();
+        private void PopulatePersonList()
         {
             try
             {
@@ -51,14 +51,14 @@ namespace WPFAdressBpk
 
         private void Btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            employees.Add(new Employee
+            persons.Add(new Person
             {
                 FirstName = tb_FirstName.Text,
                 LastName = tb_LastName.Text,
                 Email = tb_Email.Text
             });
 
-            file.Save(JsonConvert.SerializeObject(employees));
+            file.Save(JsonConvert.SerializeObject(persons));
             ClearForm();
         }
 
@@ -70,3 +70,5 @@ namespace WPFAdressBpk
         }
     }
 }
+
+

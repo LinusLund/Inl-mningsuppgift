@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WPFAdressBpk.Models
+namespace WPFAdressBpk.Models;
 
 internal interface IPerson
 {

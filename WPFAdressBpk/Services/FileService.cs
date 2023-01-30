@@ -6,21 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFAdressBpk
-{ 
+namespace WPFAdressBpk.Services
+{
+    
     internal class FileService
     {
-        public void Save(string filePath, string content)
+        public string FilePath { get; set; } = null!;
+        public void Save(string WPFList)
         {
-            using var sw = new StreamWriter(filePath);
-            sw.WriteLine(content);
+            using var sw = new StreamWriter(FilePath);
+            sw.WriteLine(WPFList);
         }
 
-        public string Read(string filePath)
+        public string Read()
         {
             try
             {
-                using var sr = new StreamReader(filePath);
+                using var sr = new StreamReader(FilePath);
                 return sr.ReadToEnd();
             }
             catch { return null!; }
