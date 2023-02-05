@@ -50,41 +50,33 @@ namespace ConsoleAddressbok.Services
             file.Save(FilePath, JsonConvert.SerializeObject(contactList));
         }
 
+        
         public void RemovePersonFromList(IPerson person)
         {
-            Console.WriteLine("Vänligen skriv in för och efternamn på kontakten du vill ta bort");
+            Console.WriteLine("Please enter the first and last name of the contact you want to remove");
             var _person = Console.ReadLine();
 
-            bool personFound = false;
-
-
-            for (int i = 0; i < contactList.Count; i++)
+            int index = contactList.FindIndex(x => x.DisplayName == _person);
+            if (index == -1)
             {
-                if (contactList[i].DisplayName == _person)
-                {
-                    Console.Clear();
-                    personFound = true;
-
-                    Console.WriteLine("Kontakten hittades, Är du säker på att du vill ta bort den? Y för Ja N för Nej. "); 
-
-                    var UserInput = Console.ReadLine();
-
-                    if (UserInput == "y")
-                    {
-                        Console.Clear();
-                        Console.WriteLine($"{contactList[i].DisplayName}" + " Har tagits bort!");
-                        contactList.Remove(contactList[i]);
-                        file.Save(FilePath, JsonConvert.SerializeObject(contactList));
-
-                    }
-                    else if (UserInput == "n")
-                    {
-                        Console.WriteLine("Du återgår till huvudmenyn vänligen tryck vilken knapp som helst");
-                    }
-                }
+                Console.WriteLine("Contact not found");
+                return;
             }
 
-
+            Console.Clear();
+            Console.WriteLine("Contact found, are you sure you want to remove it? Y for Yes N for No.");
+            var userInput = Console.ReadLine();
+            if (userInput == "y")
+            {
+                Console.Clear();
+                Console.WriteLine($"{contactList[index].DisplayName}" + " has been removed!");
+                contactList.RemoveAt(index);
+                file.Save(FilePath, JsonConvert.SerializeObject(contactList));
+            }
+            else if (userInput == "n")
+            {
+                Console.WriteLine("You are returning to the main menu, please press any key");
+            }
         }
 
         public Person GetPersonFromList(IPerson person)
